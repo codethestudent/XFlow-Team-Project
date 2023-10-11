@@ -7,12 +7,18 @@ import java.net.Socket;
 
 import com.nhnacademy.message.Message;
 
+/* socket in -> output message queue
+ * socket에서 들어오는 데이터를 flow message로 만들어 flow에 넣는다
+ * (서버 클라이언트로 들어온 메세지를 읽음)
+ */
 public class SocketInputNode extends InputNode {
     Message message;
+    Socket socket;
 
-    SocketInputNode() {
+    SocketInputNode(Socket socket, Message message) {
         super();
-        message = new Message();
+        this.message = message;
+        this.socket = socket;
     }
 
     @Override
@@ -22,8 +28,7 @@ public class SocketInputNode extends InputNode {
 
     @Override
     public void run() {
-        try (Socket socket = new Socket("localhost", 80);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
             while (true) {
                 this.message.setData(reader.readLine());
                 addOutputMessageQueue(message);

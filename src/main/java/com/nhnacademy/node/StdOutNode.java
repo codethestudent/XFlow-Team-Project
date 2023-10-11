@@ -6,7 +6,17 @@ import java.io.OutputStreamWriter;
 
 import com.nhnacademy.message.Message;
 
+/* output message queue -> 출력
+ * flow에서 처리된 결과를 stdout으로 출력함
+ */
 public class StdOutNode extends OutputNode {
+
+    Message message;
+
+    StdOutNode(Message message) {
+        super();
+        this.message = message;
+    }
 
     @Override
     public Message process(Message message) {

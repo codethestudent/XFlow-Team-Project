@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 
 import com.nhnacademy.message.Message;
 
+/* 입력 -> input message queue
+ * stdin으로 들어오는 데이터를 flow 메시지로 만들어 flow에 넣는다
+ */
 public class StdInputNode extends InputNode {
     Message message;
 
-    StdInputNode() {
+    StdInputNode(Message message) {
         super();
-        message = new Message();
+        this.message = message;
     }
 
     @Override
