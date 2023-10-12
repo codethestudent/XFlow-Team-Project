@@ -17,6 +17,7 @@ public class SocketOutNode extends OutputNode {
     Message message;
 
     SocketOutNode(Socket socket, Message message) {
+        super();
         this.socket = socket;
         this.message = message;
     }

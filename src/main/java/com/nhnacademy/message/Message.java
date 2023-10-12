@@ -1,7 +1,12 @@
 package com.nhnacademy.message;
 
-public class Message {
+public abstract class Message {
     private String data;
+    static int count;
+
+    Message() {
+        count++;
+    }
 
     public String getData() {
         return this.data;
