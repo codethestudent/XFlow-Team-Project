@@ -8,6 +8,7 @@ import com.nhnacademy.wire.Wire;
 
 import lombok.extern.slf4j.Slf4j;
 
+//socket in, std in
 @Slf4j
 public abstract class InputNode extends ActiveNode {
     Wire[] outputWires;

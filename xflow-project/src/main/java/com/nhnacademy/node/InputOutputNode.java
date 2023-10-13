@@ -6,6 +6,10 @@ import com.nhnacademy.wire.Wire;
 
 import lombok.extern.slf4j.Slf4j;
 
+/*
+ * input Wires = 
+ * output Wires = 
+ */
 @Slf4j
 public abstract class InputOutputNode extends ActiveNode {
     Wire[] inputWires;
@@ -67,9 +71,9 @@ public abstract class InputOutputNode extends ActiveNode {
 
     void output(Message message) {
         log.trace("Message Out");
-        for (Wire port : outputWires) {
-            if (port != null) {
-                port.put(message);
+        for (Wire wire : outputWires) {
+            if (wire != null) {
+                wire.put(message);
             }
         }
     }
