@@ -32,11 +32,15 @@ public class SocketInNode extends InputNode {
 
     @Override
     void process() {
+        StringBuilder lines = new StringBuilder();
         String line;
         try {
-            line = reader.readLine();
-            StringMessage message = new StringMessage(line);
+            while ((line = reader.readLine()) != null) {
+                lines.append(line + "\n");
+            }
+            StringMessage message = new StringMessage(lines.toString());
             output(message);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
