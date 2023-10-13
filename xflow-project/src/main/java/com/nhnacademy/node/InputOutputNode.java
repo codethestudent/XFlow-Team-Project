@@ -2,45 +2,72 @@ package com.nhnacademy.node;
 
 import com.nhnacademy.exception.OutOfBoundsException;
 import com.nhnacademy.message.Message;
-import com.nhnacademy.port.Port;
+import com.nhnacademy.wire.Wire;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public abstract class InputOutputNode extends ActiveNode {
-    final Port[] ports;
-    final Port[] peerPorts;
+    Wire[] inputWires;
+    Wire[] outputWires;
+
+    InputOutputNode(String name, int inCount, int outCount) {
+        super(name);
+
+        inputWires = new Wire[inCount];
+        outputWires = new Wire[outCount];
+    }
 
     InputOutputNode(int inCount, int outCount) {
         super();
 
-        ports = new Port[inCount];
-        for (int i = 0; i < ports.length; i++) {
-            ports[i] = new Port();
-        }
-
-        peerPorts = new Port[outCount];
+        inputWires = new Wire[inCount];
+        outputWires = new Wire[outCount];
     }
 
-    public void connect(int index, Port port) {
-        if (index < 0 || peerPorts.length <= index) {
+    public void connectOutputWire(int index, Wire wire) {
+        if (index < 0 || outputWires.length <= index) {
             throw new OutOfBoundsException();
         }
 
-        peerPorts[index] = port;
+        outputWires[index] = wire;
     }
 
-    public int getInputPortCount() {
-        return ports.length;
+    public int getOutputWireCount() {
+        return outputWires.length;
     }
 
-    public Port getInputPort(int index) {
-        if (index < 0 || ports.length <= index) {
+    public Wire getOutputWire(int index) {
+        if (index < 0 || outputWires.length <= index) {
             throw new OutOfBoundsException();
         }
 
-        return ports[index];
+        return outputWires[index];
+    }
+
+    public void connectInputWire(int index, Wire wire) {
+        if (index < 0 || inputWires.length <= index) {
+            throw new OutOfBoundsException();
+        }
+
+        inputWires[index] = wire;
+    }
+
+    public int getInputWireCount() {
+        return inputWires.length;
+    }
+
+    public Wire getInputWire(int index) {
+        if (index < 0 || inputWires.length <= index) {
+            throw new OutOfBoundsException();
+        }
+
+        return inputWires[index];
     }
 
     void output(Message message) {
-        for (Port port : peerPorts) {
+        log.trace("Message Out");
+        for (Wire port : outputWires) {
             if (port != null) {
                 port.put(message);
             }
