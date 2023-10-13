@@ -5,6 +5,7 @@ import com.nhnacademy.exception.InvalidArgumentException;
 import com.nhnacademy.exception.OutOfBoundsException;
 import com.nhnacademy.wire.Wire;
 
+// socket out, std out
 public abstract class OutputNode extends ActiveNode {
     Wire[] inputWires;
 
