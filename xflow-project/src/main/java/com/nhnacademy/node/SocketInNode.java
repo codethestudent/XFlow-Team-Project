@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import com.nhnacademy.message.Message;
 import com.nhnacademy.message.StringMessage;
 
 public class SocketInNode extends InputNode {
