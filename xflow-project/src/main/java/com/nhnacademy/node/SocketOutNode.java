@@ -1,35 +1,25 @@
 package com.nhnacademy.node;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import com.nhnacademy.exception.InvalidArgumentException;
-import com.nhnacademy.exception.OutOfBoundsException;
 import com.nhnacademy.message.Message;
-import com.nhnacademy.port.Port;
 
 public class SocketOutNode extends OutputNode {
 
     Socket socket;
-
-
 
     public SocketOutNode(Socket socket) {
         super(count);
         this.socket = socket;
     }
 
-
-
     @Override
     public void process() {
 
         try {
-            BufferedWriter socketOut =
-                    new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            BufferedWriter socketOut = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             for (int i = 0; i < getInputCount(); i++) {
                 if (getInput(i).hasMessage()) {
@@ -40,8 +30,6 @@ public class SocketOutNode extends OutputNode {
                 }
 
             }
-
-
 
         } catch (IOException e) {
             //
