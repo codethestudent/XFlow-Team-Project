@@ -23,10 +23,10 @@ public class StdOutNode extends OutputNode {
 
     @Override
     void process() {
-        for (int i = 0; i < getInputCount(); i++) {
-            if (getInput(i).hasMessage()) {
-                System.out.println(getInput(i));
-                Message message = getInput(i).get();
+        for (int i = 0; i < getInputWireCount(); i++) {
+            if (getInputWire(i).hasMessage()) {
+                System.out.println(getInputWire(i));
+                Message message = getInputWire(i).get();
                 if (message instanceof StringMessage) {
                     System.out.println(((StringMessage) message).getPayload());
                 }

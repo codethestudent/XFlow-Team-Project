@@ -4,36 +4,63 @@ import com.nhnacademy.exception.AlreadyExistsException;
 import com.nhnacademy.exception.InvalidArgumentException;
 import com.nhnacademy.exception.OutOfBoundsException;
 import com.nhnacademy.message.Message;
-import com.nhnacademy.port.Port;
+import com.nhnacademy.wire.Wire;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public abstract class InputNode extends ActiveNode {
-    Port[] peerPorts;
+    Wire[] outputWires;
 
-    InputNode(int count) {
-        super();
+    InputNode(String name, int count) {
+        super(name);
+
         if (count <= 0) {
             throw new InvalidArgumentException();
         }
 
-        peerPorts = new Port[count];
+        outputWires = new Wire[count];
     }
 
-    public void connect(int index, Port port) {
-        if (count <= index) {
+    InputNode(int count) {
+        super();
+
+        if (count <= 0) {
+            throw new InvalidArgumentException();
+        }
+
+        outputWires = new Wire[count];
+    }
+
+    public void connectOutputWire(int index, Wire wire) {
+        if (outputWires.length <= index) {
             throw new OutOfBoundsException();
         }
 
-        if (peerPorts[index] != null) {
+        if (outputWires[index] != null) {
             throw new AlreadyExistsException();
         }
 
-        peerPorts[index] = port;
+        outputWires[index] = wire;
+    }
+
+    public int getOutputWireCount() {
+        return outputWires.length;
+    }
+
+    public Wire getoutputWire(int index) {
+        if (index < 0 || outputWires.length <= index) {
+            throw new OutOfBoundsException();
+        }
+
+        return outputWires[index];
     }
 
     void output(Message message) {
-        for (Port port : peerPorts) {
-            if (port != null) {
-                port.put(message);
+        log.trace("Message Out");
+        for (Wire wire : outputWires) {
+            if (wire != null) {
+                wire.put(message);
             }
         }
     }

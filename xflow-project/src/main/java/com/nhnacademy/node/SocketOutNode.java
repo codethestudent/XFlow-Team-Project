@@ -21,9 +21,9 @@ public class SocketOutNode extends OutputNode {
         try {
             BufferedWriter socketOut = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-            for (int i = 0; i < getInputCount(); i++) {
-                if (getInput(i).hasMessage()) {
-                    Message message = getInput(i).get();
+            for (int i = 0; i < getInputWireCount(); i++) {
+                if (getInputWire(i).hasMessage()) {
+                    Message message = getInputWire(i).get();
                     // 객체를 String으로 형변환을 해줘야함
                     socketOut.write(message.toString());
                     socketOut.flush();
