@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-10-13T04:08:28.927Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="pf-Rh3_HyKsFYlzyTFLw" version="22.0.4" type="github">
+<mxfile host="app.diagrams.net" modified="2023-10-13T04:08:51.964Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="pw9xWAp7kYKK4gn7M90U" version="22.0.4" type="github">
   <diagram name="페이지-1" id="HDxFREO_OPp5HufmHN-d">
     <mxGraphModel dx="2155" dy="865" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -171,7 +171,7 @@
         <mxCell id="BAWsP3CoqttX7D4WCgfm-6" value="writer.flush()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="450" y="700" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BAWsP3CoqttX7D4WCgfm-7" value="writer.write()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="BAWsP3CoqttX7D4WCgfm-7" value="reader.read()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="160" y="700" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
