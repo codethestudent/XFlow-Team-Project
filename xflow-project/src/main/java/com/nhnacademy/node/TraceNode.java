@@ -31,7 +31,8 @@ public class TraceNode extends OutputNode {
     }
 
     @Override
-    void preprocess() {}
+    void preprocess() {
+    }
 
     @Override
     void process() {
