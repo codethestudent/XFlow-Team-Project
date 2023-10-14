@@ -30,8 +30,15 @@ public class TraceNode extends OutputNode {
         inputNode.traceWire = wire;
     }
 
+    /*
+     * TODO :
+     * secret, 400, 500 단어 포함되어있는지 확인해주세요.
+     * 있다면 예외처리
+     */
+
     @Override
-    void preprocess() {}
+    void preprocess() {
+    }
 
     @Override
     void process() {
