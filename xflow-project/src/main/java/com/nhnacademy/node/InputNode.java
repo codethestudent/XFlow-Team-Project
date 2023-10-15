@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class InputNode extends ActiveNode {
     Wire[] outputWires;
-    Wire traceWire;
 
     InputNode(String name, int count) {
         super(name);
@@ -63,9 +62,6 @@ public abstract class InputNode extends ActiveNode {
         for (Wire wire : outputWires) {
             if (wire != null) {
                 wire.put(message);
-                if (traceWire != null) {
-                    traceWire.put(message);
-                }
             }
         }
     }
