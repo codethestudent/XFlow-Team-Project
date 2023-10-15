@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2023-10-14T09:04:06.685Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="MM-VIW07o-AQ8Np1DsNh" version="22.0.4" type="github">
+<mxfile host="app.diagrams.net" modified="2023-10-15T04:14:18.544Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="CWB_Tdee6ud4HAEkqdAz" version="22.0.4" type="github">
   <diagram name="페이지-1" id="HDxFREO_OPp5HufmHN-d">
-    <mxGraphModel dx="3382" dy="938" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2638" dy="630" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="P54Lo2UrdhA4ZUDvKljr-2" value="socket" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;" vertex="1" parent="1">
-          <mxGeometry x="-744.75" y="360" width="389.5" height="140" as="geometry" />
+          <mxGeometry x="-744.75" y="360" width="384.75" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DJnasuDHOr4qNgyVxcK3-1" value="Server" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="480" y="70" width="120" height="60" as="geometry" />
@@ -240,25 +240,25 @@
           <mxGeometry x="-658.87" y="290" width="60" height="20" as="geometry" />
         </mxCell>
         <mxCell id="P54Lo2UrdhA4ZUDvKljr-1" value="Http Server Node&lt;br&gt;&amp;lt;InputOutput&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-668" y="640" width="215" height="210" as="geometry" />
+          <mxGeometry x="-668" y="560" width="215" height="210" as="geometry" />
         </mxCell>
         <mxCell id="P54Lo2UrdhA4ZUDvKljr-3" value="socket" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
-          <mxGeometry x="-513" y="630" width="60" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="P54Lo2UrdhA4ZUDvKljr-4" value="Socket Out Node&lt;br&gt;&amp;lt;Output&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-718.87" y="480" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="P54Lo2UrdhA4ZUDvKljr-5" value="Socket In Node&lt;br&gt;&amp;lt;Input&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-513" y="480" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="P54Lo2UrdhA4ZUDvKljr-6" value="socket" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
           <mxGeometry x="-513" y="550" width="60" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="P54Lo2UrdhA4ZUDvKljr-4" value="Socket Out Node&lt;br&gt;&amp;lt;Output&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-718.87" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P54Lo2UrdhA4ZUDvKljr-5" value="Socket In Node&lt;br&gt;&amp;lt;Input&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-513" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P54Lo2UrdhA4ZUDvKljr-6" value="socket" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="-513" y="470" width="60" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="P54Lo2UrdhA4ZUDvKljr-7" value="Queue" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
-          <mxGeometry x="-665.25" y="630" width="60.5" height="20" as="geometry" />
+          <mxGeometry x="-665.25" y="550" width="60.5" height="20" as="geometry" />
         </mxCell>
         <mxCell id="P54Lo2UrdhA4ZUDvKljr-8" value="Queue" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
-          <mxGeometry x="-665.25" y="550" width="60.5" height="20" as="geometry" />
+          <mxGeometry x="-665.25" y="470" width="60.5" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
