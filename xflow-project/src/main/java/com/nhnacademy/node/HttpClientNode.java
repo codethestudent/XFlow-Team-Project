@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.nhnacademy.wire.BufferedWire;
+
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -15,25 +17,39 @@ public class HttpClientNode extends InputOutputNode {
 
     int port;
 
-    HttpClientNode(String name, int port) {
+    public HttpClientNode(String name, int port) {
         super(name, 1, 1);
         this.port = port;
     }
 
-    HttpClientNode(int port) {
+    public HttpClientNode(int port) {
         super(1, 1);
         this.port = port;
     }
 
     @Override
     public void process() {
-        try (Socket socket = new Socket("localhost", port)) {
+        try {
+            Socket socket = new Socket("localhost", port);
+            BufferedWire socketInWire = new BufferedWire();
+            BufferedWire socketOutWire = new BufferedWire();
+            SocketInNode socketInNode = new SocketInNode(socket);
+            SocketOutNode socketOutNode = new SocketOutNode(socket);
             log.trace("connected!");
-            // std in -> socket out
-            for (int i = 0; i < getInputWireCount(); i++) {
-                if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
-                    output(getInputWire(i).get());
+
+            socketInNode.connectOutputWire(0, socketInWire);
+            this.connectInputWire(0, socketInWire);
+            socketOutNode.connectInputWire(0, socketOutWire);
+            this.connectOutputWire(0, socketOutWire);
+            if (socketInWire != null) {
+                // std in -> socket out
+                for (int i = 0; i < getInputWireCount(); i++) {
+                    if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
+                        output(getInputWire(i).get());
+                    }
                 }
+                socketInNode.start();
+                socketOutNode.start();
             }
 
         } catch (UnknownHostException e) {

@@ -41,7 +41,7 @@ public abstract class InputOutputNode extends ActiveNode {
         return outputWires.length;
     }
 
-    public Wire getOutputWire(int index) {
+    public synchronized Wire getOutputWire(int index) {
         if (index < 0 || outputWires.length <= index) {
             throw new OutOfBoundsException();
         }
@@ -61,7 +61,7 @@ public abstract class InputOutputNode extends ActiveNode {
         return inputWires.length;
     }
 
-    public Wire getInputWire(int index) {
+    public synchronized Wire getInputWire(int index) {
         if (index < 0 || inputWires.length <= index) {
             throw new OutOfBoundsException();
         }

@@ -45,9 +45,4 @@ public class SocketInNode extends InputNode {
         }
     }
 
-    @Override
-    void postprocess() {
-        socket = null;
-    }
-
 }
