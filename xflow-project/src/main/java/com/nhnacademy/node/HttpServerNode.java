@@ -14,6 +14,10 @@ public class HttpServerNode extends InputOutputNode {
     ServerSocket serverSocket;
     int port = 8888;
     Socket socket;
+    BufferedWire socketInWire;
+    BufferedWire socketOutWire;
+    SocketInNode socketInNode;
+    SocketOutNode socketOutNode;
 
     public HttpServerNode(String name) {
         super(name, 1, 1);
@@ -27,6 +31,15 @@ public class HttpServerNode extends InputOutputNode {
     public void preprocess() {
         try {
             serverSocket = new ServerSocket(port);
+            socketInWire = new BufferedWire();
+            socketOutWire = new BufferedWire();
+            socketInNode = new SocketInNode(socket);
+            socketOutNode = new SocketOutNode(socket);
+
+            socketInNode.connectOutputWire(0, socketInWire);
+            this.connectInputWire(0, socketInWire);
+            this.connectOutputWire(0, socketOutWire);
+            socketOutNode.connectInputWire(0, socketOutWire);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,16 +48,7 @@ public class HttpServerNode extends InputOutputNode {
     @Override
     public void process() {
         try {
-            Socket socket = serverSocket.accept();
-            BufferedWire socketInWire = new BufferedWire();
-            BufferedWire socketOutWire = new BufferedWire();
-            SocketInNode socketInNode = new SocketInNode(socket);
-            SocketOutNode socketOutNode = new SocketOutNode(socket);
-
-            socketInNode.connectOutputWire(0, socketInWire);
-            this.connectInputWire(0, socketInWire);
-            this.connectOutputWire(0, socketOutWire);
-            socketOutNode.connectInputWire(0, socketOutWire);
+            socket = serverSocket.accept();
             if (socketInWire != null) {
                 for (int i = 0; i < getInputWireCount(); i++) {
                     if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {

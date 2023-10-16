@@ -16,6 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 public class HttpClientNode extends InputOutputNode {
 
     int port;
+    Socket socket;
+    BufferedWire socketInWire;
+    BufferedWire socketOutWire;
+    SocketInNode socketInNode;
+    SocketOutNode socketOutNode;
 
     public HttpClientNode(String name, int port) {
         super(name, 1, 1);
@@ -28,34 +33,38 @@ public class HttpClientNode extends InputOutputNode {
     }
 
     @Override
-    public void process() {
+    public void preprocess() {
         try {
-            Socket socket = new Socket("localhost", port);
-            BufferedWire socketInWire = new BufferedWire();
-            BufferedWire socketOutWire = new BufferedWire();
-            SocketInNode socketInNode = new SocketInNode(socket);
-            SocketOutNode socketOutNode = new SocketOutNode(socket);
-            log.trace("connected!");
+            socket = new Socket("localhost", port);
+            socketInWire = new BufferedWire();
+            socketOutWire = new BufferedWire();
+            socketInNode = new SocketInNode(socket);
+            socketOutNode = new SocketOutNode(socket);
 
             socketInNode.connectOutputWire(0, socketInWire);
             this.connectInputWire(0, socketInWire);
             socketOutNode.connectInputWire(0, socketOutWire);
             this.connectOutputWire(0, socketOutWire);
-            if (socketInWire != null) {
-                // std in -> socket out
-                for (int i = 0; i < getInputWireCount(); i++) {
-                    if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
-                        output(getInputWire(i).get());
-                    }
-                }
-                socketInNode.start();
-                socketOutNode.start();
-            }
-
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void process() {
+        log.trace("connected!");
+
+        if (socketInWire != null) {
+            // std in -> socket out
+            for (int i = 0; i < getInputWireCount(); i++) {
+                if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
+                    output(getInputWire(i).get());
+                }
+            }
+            socketInNode.start();
+            socketOutNode.start();
         }
     }
 
