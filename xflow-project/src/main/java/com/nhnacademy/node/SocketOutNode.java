@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import com.nhnacademy.message.Message;
+import com.nhnacademy.wire.Wire;
 
 public class SocketOutNode extends OutputNode {
 
@@ -22,20 +23,15 @@ public class SocketOutNode extends OutputNode {
             BufferedWriter socketOut = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             for (int i = 0; i < getInputWireCount(); i++) {
-                if (getInputWire(i).hasMessage()) {
-                    Message message = getInputWire(i).get();
-                    // 객체를 String으로 형변환을 해줘야함
+                Wire wire = getInputWire(i);
+                if (wire != null && wire.hasMessage()) {
+                    Message message = wire.get();
                     socketOut.write(message.toString());
                     socketOut.flush();
                 }
-
             }
 
         } catch (IOException e) {
-            //
-
         }
-
     }
-
 }
