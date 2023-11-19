@@ -1,53 +1,59 @@
 package com.nhnacademy.node;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import com.nhnacademy.exception.InvalidArgumentException;
-import com.nhnacademy.exception.OutOfBoundsException;
-import com.nhnacademy.message.Message;
-import com.nhnacademy.port.Port;
 
+import com.nhnacademy.message.Message;
+import com.nhnacademy.message.StringMessage;
+import com.nhnacademy.wire.Wire;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class SocketOutNode extends OutputNode {
 
+    BufferedWriter socketOut;
     Socket socket;
 
-
-
     public SocketOutNode(Socket socket) {
-        super(count);
+        this(1);
         this.socket = socket;
     }
 
-
+    public SocketOutNode(int count) {
+        super(count);
+    }
 
     @Override
-    public void process() {
-
+    public void preprocess() {
         try {
-            BufferedWriter socketOut =
-                    new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-            for (int i = 0; i < getInputCount(); i++) {
-                if (getInput(i).hasMessage()) {
-                    Message message = getInput(i).get();
-                    // 객체를 String으로 형변환을 해줘야함
-                    socketOut.write(message.toString());
-                    socketOut.flush();
-                }
-
-            }
-
-
-
+            socketOut = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
-            //
-
+            e.printStackTrace();
         }
 
     }
 
+    @Override
+    public void process() {
+        try {
+            for (int i = 0; i < getInputWireCount(); i++) {
+                Wire wire = getInputWire(i);
+                if (wire != null && wire.hasMessage()) {
+                    Message message = wire.get();
+                    log.trace(((StringMessage) message).getPayload());
+                    socketOut.write(((StringMessage) message).getPayload());
+                    socketOut.write("\n");
+                    socketOut.flush();
+                    log.trace("socket out processed");
+                }
+            }
+
+        } catch (IOException e) {
+        }
+    }
 }
+
+

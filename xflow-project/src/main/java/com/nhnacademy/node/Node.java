@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class Node {
 
-
     // 현재 생성된 노드의 개수
     static int count;
     // 생성된 노드의 id
