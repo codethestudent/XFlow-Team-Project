@@ -53,13 +53,12 @@ public abstract class InputNode extends ActiveNode {
         if (index < 0 || outputWires.length <= index) {
             throw new OutOfBoundsException();
         }
-
         return outputWires[index];
     }
 
     void output(Message message) {
-        log.trace("Message Out");
         for (Wire wire : outputWires) {
+            log.trace("Message Out");
             if (wire != null) {
                 wire.put(message);
             }

@@ -65,7 +65,6 @@ public abstract class InputOutputNode extends ActiveNode {
         if (index < 0 || inputWires.length <= index) {
             throw new OutOfBoundsException();
         }
-
         return inputWires[index];
     }
 
