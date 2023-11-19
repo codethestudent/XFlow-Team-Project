@@ -3,7 +3,10 @@ package com.nhnacademy.node;
 import java.util.Scanner;
 import com.nhnacademy.message.StringMessage;
 
+import lombok.extern.slf4j.Slf4j;
+
 //Scanner로 들어오는 data를 MSG로 만들어서 flow에 넣기
+@Slf4j
 public class StdInNode extends InputNode {
     Scanner sc;
 
@@ -23,7 +26,7 @@ public class StdInNode extends InputNode {
 
     @Override
     void process() {
-        System.out.print("input : ");
+        log.info("enter a message : ");
         String inData = sc.nextLine();
         StringMessage message = new StringMessage(inData);
 

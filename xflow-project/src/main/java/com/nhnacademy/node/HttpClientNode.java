@@ -23,12 +23,12 @@ public class HttpClientNode extends InputOutputNode {
     SocketOutNode socketOutNode;
 
     public HttpClientNode(String name, int port) {
-        super(name, 1, 1);
+        super(name, 2, 2);
         this.port = port;
     }
 
     public HttpClientNode(int port) {
-        super(1, 1);
+        super(2, 2);
         this.port = port;
     }
 
@@ -42,9 +42,11 @@ public class HttpClientNode extends InputOutputNode {
             socketOutNode = new SocketOutNode(socket);
 
             socketInNode.connectOutputWire(0, socketInWire);
-            this.connectInputWire(0, socketInWire);
+            this.connectInputWire(1, socketInWire);
             socketOutNode.connectInputWire(0, socketOutWire);
-            this.connectOutputWire(0, socketOutWire);
+            this.connectOutputWire(1, socketOutWire);
+            socketInNode.start();
+            socketOutNode.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -54,18 +56,23 @@ public class HttpClientNode extends InputOutputNode {
 
     @Override
     public void process() {
-        log.trace("connected!");
+        if (socket != null) {
+            // log.trace("connected!");
+        } else {
+            log.trace("waiting for connectino..");
+            this.preprocess();
+        }
 
         if (socketInWire != null) {
             // std in -> socket out
+            // log.trace("socket in wire not null");
             for (int i = 0; i < getInputWireCount(); i++) {
-                if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
+                if (getInputWire(i).hasMessage()) {
                     output(getInputWire(i).get());
                 }
             }
-            socketInNode.start();
-            socketOutNode.start();
         }
+
     }
 
 }

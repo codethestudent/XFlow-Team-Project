@@ -6,10 +6,12 @@ import java.net.Socket;
 
 import com.nhnacademy.wire.BufferedWire;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*
  * 음,,, 일단 여기선 서버를 열긴 해야하는데 이제,,, json 파일도 ems로 부터 요청을 해야해서
  */
-
+@Slf4j
 public class HttpServerNode extends InputOutputNode {
     ServerSocket serverSocket;
     int port = 8888;
@@ -33,6 +35,8 @@ public class HttpServerNode extends InputOutputNode {
             serverSocket = new ServerSocket(port);
             socketInWire = new BufferedWire();
             socketOutWire = new BufferedWire();
+            socket = serverSocket.accept();
+            log.trace("client accepted");
             socketInNode = new SocketInNode(socket);
             socketOutNode = new SocketOutNode(socket);
 
@@ -40,6 +44,8 @@ public class HttpServerNode extends InputOutputNode {
             this.connectInputWire(0, socketInWire);
             this.connectOutputWire(0, socketOutWire);
             socketOutNode.connectInputWire(0, socketOutWire);
+            socketInNode.start();
+            socketOutNode.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,18 +53,13 @@ public class HttpServerNode extends InputOutputNode {
 
     @Override
     public void process() {
-        try {
-            socket = serverSocket.accept();
-            if (socketInWire != null) {
-                for (int i = 0; i < getInputWireCount(); i++) {
-                    if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
-                        output(getInputWire(i).get());
-                    }
+        if (socketInWire != null) {
+            for (int i = 0; i < getInputWireCount(); i++) {
+                if ((getInputWire(i) != null) && (getInputWire(i).hasMessage())) {
+                    log.trace("got message from a client : " + getInputWire(i).get());
+                    // output(getInputWire(i).get());
                 }
-                socketInNode.start();
-                socketOutNode.start();
             }
-        } catch (IOException e) {
         }
     }
 }

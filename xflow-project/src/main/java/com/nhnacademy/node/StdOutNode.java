@@ -3,9 +3,12 @@ package com.nhnacademy.node;
 import com.nhnacademy.message.Message;
 import com.nhnacademy.message.StringMessage;
 
+import lombok.extern.slf4j.Slf4j;
+
 /* output message queue -> 출력
  * flow에서 처리된 결과를 stdout으로 출력함
  */
+@Slf4j
 public class StdOutNode extends OutputNode {
 
     public StdOutNode() {
